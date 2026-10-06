@@ -3,6 +3,7 @@ import { Mail, MapPin, Send, CheckCircle2, Loader2 } from 'lucide-react';
 import SectionHeader from './SectionHeader';
 import { Reveal } from '@/components/Reveal';
 import { profile, socials } from '@/data/portfolio';
+import emailjs from '@emailjs/browser';
 
 export default function Contact() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
@@ -12,17 +13,31 @@ export default function Contact() {
     e.preventDefault();
     setStatus('sending');
 
-    // Simulate sending, then open mail client with prefilled content
-    setTimeout(() => {
-      const subject = encodeURIComponent(`Portfolio Contact from ${formState.name || 'Someone'}`);
-      const body = encodeURIComponent(`${formState.message}\n\nFrom: ${formState.name} (${formState.email})`);
-      window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
-      setStatus('sent');
-      setTimeout(() => {
+    const templateParams = {
+      name: formState.name,
+      email: formState.email,
+      message: formState.message,
+    };
+
+    emailjs.send(
+      'service_425nq0j',
+      'template_unhzjq1',
+      templateParams,
+      'nIDDBkDncxVhHiWPW'
+    )
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+        setStatus('sent');
+        setTimeout(() => {
+          setStatus('idle');
+          setFormState({ name: '', email: '', message: '' });
+        }, 3000);
+      })
+      .catch((err) => {
+        console.log('FAILED...', err);
+        alert('Message bhejte waqt kuch error aa gaya. Phir se try karo.');
         setStatus('idle');
-        setFormState({ name: '', email: '', message: '' });
-      }, 3000);
-    }, 800);
+      });
   };
 
   return (
@@ -65,16 +80,16 @@ export default function Contact() {
                   </div>
                 </a>
 
-             <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
-                               <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-500 flex items-center justify-center shadow-lg">
-                                 <MapPin className="w-5 h-5 text-white" />
-                               </div>
-                               <div>
-                                 <p className="text-xs text-slate-500 font-mono uppercase tracking-wide">Location</p>
-                                 <p className="text-sm font-medium text-white">{profile.location}</p>
-                               </div>
-                             </div>
-                           </div>
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
+                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-500 flex items-center justify-center shadow-lg">
+                    <MapPin className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 font-mono uppercase tracking-wide">Location</p>
+                    <p className="text-sm font-medium text-white">{profile.location}</p>
+                  </div>
+                </div>
+              </div>
 
               {/* Socials */}
               <div className="mt-auto">

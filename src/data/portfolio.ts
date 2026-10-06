@@ -40,7 +40,7 @@ export const stats: { label: string; value: number; suffix: string; decimals: nu
 ];
 
 export const socials: { label: string; href: string; icon: LucideIcon; color: string }[] = [
-  { label: 'Email', href: 'https://mail.google.com/mail/?view=cm&fs=1&to=nayanhchaudhari45@gmail.com', icon: Mail, color: 'hover:text-rose-400' },
+  { label: 'Email', href: 'mailto:nayanhchaudhari45@gmail.com', icon: Mail, color: 'hover:text-rose-400' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/nayan-c-708025259/', icon: Linkedin, color: 'hover:text-sky-400' },
   { label: 'GitHub', href: 'https://github.com/nayan03nc', icon: Github, color: 'hover:text-slate-200' },
   { label: 'LeetCode', href: 'https://leetcode.com/nayanchaudhari', icon: Code, color: 'hover:text-amber-400' },
