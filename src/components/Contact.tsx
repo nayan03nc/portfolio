@@ -20,10 +20,10 @@ export default function Contact() {
     };
 
     emailjs.send(
-      'service_425nq0j',
-      'template_unhzjq1',
+      'service_1dinm11',
+      'template_xgh059h',
       templateParams,
-      'nIDDBkDncxVhHiWPW'
+      '1NB6kWxDJiTkWLz8i'
     )
       .then((response) => {
         console.log('SUCCESS!', response.status, response.text);
@@ -35,7 +35,7 @@ export default function Contact() {
       })
       .catch((err) => {
         console.log('FAILED...', err);
-        alert('Message bhejte waqt kuch error aa gaya. Phir se try karo.');
+        alert('Failed to send message. Please try again.');
         setStatus('idle');
       });
   };
