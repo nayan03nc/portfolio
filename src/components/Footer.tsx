@@ -80,9 +80,9 @@ export default function Footer() {
           {/* Bottom bar */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-white/5">
                       <p className="text-xs text-slate-500 flex items-center gap-1.5">
-                        &copy; {new Date().getFullYear()} {profile.name}. Built with
-                        <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
-                        using React &amp; Tailwind CSS
+                        &copy; {new Date().getFullYear()} {profile.name}.
+
+                  
                       </p>
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
